@@ -116,11 +116,10 @@ function blocker {
             done
             done
 
-            # ّFind and open SSH port
-            SSH_PORT=$(grep "^Port " /etc/ssh/sshd_config | awk '{print $2}')
-            if [ -z "$SSH_PORT" ]; then
-                SSH_PORT=22
-            fi
+            # Open SSH Port
+            read -p "Enter the SSH port you wish to open (default is 22): " SSH_PORT
+            SSH_PORT=${SSH_PORT:-22}
+
             sudo iptables -A INPUT -p tcp --dport $SSH_PORT -j ACCEPT
 
             # Save rules
@@ -130,8 +129,10 @@ function blocker {
 
             if [ "$protocol" == "all" ]; then
             echo "TCP & UDP [$ports] successfully blocked for $isp."
+            echo "Port $SSH_PORT has been opened for SSH."
             else
             echo "$protocol [$ports] successfully blocked for $isp."
+            echo "Port $SSH_PORT has been opened for SSH."
             fi
             ;;
         2)
@@ -140,16 +141,18 @@ function blocker {
             echo "Please Wait..."
             # Delete previous rules
             sudo iptables -F
-            
+
+            # Add new rules
             for IP in $IP_LIST; do
                 sudo iptables -A INPUT -s $IP -j DROP
             done
 
-            # ّFind and open SSH port
-            SSH_PORT=$(grep "^Port " /etc/ssh/sshd_config | awk '{print $2}')
-            if [ -z "$SSH_PORT" ]; then
-                SSH_PORT=22
-            fi
+            clear
+
+            # Open SSH Port
+            read -p "Enter the SSH port you wish to open (default is 22): " SSH_PORT
+            SSH_PORT=${SSH_PORT:-22}
+
             sudo iptables -A INPUT -p tcp --dport $SSH_PORT -j ACCEPT
 
             # Save rules
@@ -159,6 +162,7 @@ function blocker {
             clear
 
             echo "$isp successfully blocked for all ports."
+            echo "Port $SSH_PORT has been opened for SSH."
             ;;
         *) echo "Invalid option"; blocking_menu ;;
     esac
