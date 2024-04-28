@@ -1,2 +1,5 @@
-# ISP-Blocker
-This simple bash script can block IR ISPs ip ranges in your server.
+# Using
+Open your terminal and run the script with
+```
+bash <(curl -s https://raw.githubusercontent.com/Kiya6955/ISP-Blocker/main/mci-blocker.sh)
+```
