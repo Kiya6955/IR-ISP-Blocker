@@ -19,7 +19,7 @@ function blocking_menu {
     clear
     echo "---------- $isp Menu ----------"
     echo "1-Block $isp"
-    echo "2-UnBlock $isp"
+    echo "2-UnBlock All"
     echo "3-Back to Main Menu"
     read -p "Enter your choice: " choice
     case $choice in
