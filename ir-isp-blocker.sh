@@ -117,7 +117,7 @@ function blocker {
             done
 
             # Open SSH Port
-            read -p "Enter the SSH port you wish to open (default is 22): " SSH_PORT
+            read -p "Enter the SSH port you want to open (default is 22): " SSH_PORT
             SSH_PORT=${SSH_PORT:-22}
 
             sudo iptables -A INPUT -p tcp --dport $SSH_PORT -j ACCEPT
@@ -150,7 +150,7 @@ function blocker {
             clear
 
             # Open SSH Port
-            read -p "Enter the SSH port you wish to open (default is 22): " SSH_PORT
+            read -p "Enter the SSH port you want to open (default is 22): " SSH_PORT
             SSH_PORT=${SSH_PORT:-22}
 
             sudo iptables -A INPUT -p tcp --dport $SSH_PORT -j ACCEPT
