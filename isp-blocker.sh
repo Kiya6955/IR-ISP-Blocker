@@ -98,6 +98,7 @@ function blocker {
             
             clear
 
+            echo "Please Wait..."
             # Delete previous rules
             sudo iptables -F
 
@@ -136,7 +137,11 @@ function blocker {
         2)
             clear
 
-            sudo iptables -A INPUT -s $IP -j DROP
+            echo "Please Wait..."
+            
+            for IP in $IP_LIST; do
+                sudo iptables -A INPUT -s $IP -j DROP
+            done
 
             # ّFind and open SSH port
             SSH_PORT=$(grep "^Port " /etc/ssh/sshd_config | awk '{print $2}')
