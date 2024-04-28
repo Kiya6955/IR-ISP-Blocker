@@ -145,6 +145,8 @@ function blocker {
             SSH_PORT=${SSH_PORT:-22}
 
             sudo iptables -A INPUT -p tcp --dport $SSH_PORT -j ACCEPT
+
+            clear
             
             echo "Please Wait..."
             # Add new rules
