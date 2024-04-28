@@ -169,7 +169,7 @@ function unblocker {
     sudo iptables -F
     sudo /sbin/iptables-save
     clear
-    echo "$isp UnBlocked successfully!"
+    echo "All ISPs UnBlocked successfully!"
     read -p "Press enter to return to Menu" dummy
     blocking_menu
 }
