@@ -2,7 +2,7 @@
 
 function main_menu {
     clear
-    echo "---------- Main Menu ----------"
+    echo "---------- Iran ISP Blocker ----------"
     echo "Which ISP do you want block/unblock? : "
     echo "1-MCI(Hamrah Aval)"
     echo "2-MTN(Irancell)"
@@ -46,14 +46,14 @@ function blocker {
 
         # Get the IP list from Github
         if [ "$isp" == "MCI" ]; then
-        IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/ISP-Blocker/main/mci-ips.ipv4')
+        IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/IR-ISP-Blocker/main/mci-ips.ipv4')
         if [ $? -ne 0 ]; then
         echo "Failed to fetch the MTN IP list. Please contact with @Kiya6955"
         read -p "Press enter to return to Menu" dummy
         blocking_menu
         fi
         else
-        IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/ISP-Blocker/main/mtn-ips.ipv4')
+        IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/IR-ISP-Blocker/main/mtn-ips.ipv4')
         if [ $? -ne 0 ]; then
         echo "Failed to fetch the MTN IP list. Please contact with @Kiya6955"
         read -p "Press enter to return to Menu" dummy
