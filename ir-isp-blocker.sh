@@ -137,24 +137,21 @@ function blocker {
             ;;
         2)
             clear
-
-            echo "Please Wait..."
             # Delete previous rules
             sudo iptables -F
-
-            # Add new rules
-            for IP in $IP_LIST; do
-                sudo iptables -A INPUT -s $IP -j DROP
-            done
-
-            clear
-
+            
             # Open SSH Port
             read -p "Enter the SSH port you want to open (default is 22): " SSH_PORT
             SSH_PORT=${SSH_PORT:-22}
 
             sudo iptables -A INPUT -p tcp --dport $SSH_PORT -j ACCEPT
-
+            
+            echo "Please Wait..."
+            # Add new rules
+            for IP in $IP_LIST; do
+                sudo iptables -A INPUT -s $IP -j DROP
+            done
+            
             # Save rules
             sudo /sbin/iptables-save
 
