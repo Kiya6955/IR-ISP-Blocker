@@ -46,14 +46,14 @@ function blocker {
 
         # Get the IP list from Github
         if [ "$isp" == "MCI" ]; then
-        IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/ISP-Blocker/main/mci-ips.txt')
+        IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/ISP-Blocker/main/mci-ips.ipv4')
         if [ $? -ne 0 ]; then
         echo "Failed to fetch the MTN IP list. Please contact with @Kiya6955"
         read -p "Press enter to return to Menu" dummy
         blocking_menu
         fi
         else
-        IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/ISP-Blocker/main/mtn-ips.txt')
+        IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/ISP-Blocker/main/mtn-ips.ipv4')
         if [ $? -ne 0 ]; then
         echo "Failed to fetch the MTN IP list. Please contact with @Kiya6955"
         read -p "Press enter to return to Menu" dummy
