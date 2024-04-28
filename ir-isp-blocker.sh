@@ -138,6 +138,8 @@ function blocker {
             clear
 
             echo "Please Wait..."
+            # Delete previous rules
+            sudo iptables -F
             
             for IP in $IP_LIST; do
                 sudo iptables -A INPUT -s $IP -j DROP
