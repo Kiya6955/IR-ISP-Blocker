@@ -6,11 +6,13 @@ function main_menu {
     echo "Which ISP do you want block/unblock? : "
     echo "1-MCI(Hamrah Aval)"
     echo "2-MTN(Irancell)"
-    echo "3-No One.Exit"
+    echo "3-TCI(Mokhaberat)"
+    echo "4-Exit"
     read -p "Enter your choice: " isp
     case $isp in
     1) isp="MCI" blocking_menu ;;
     2) isp="MTN" blocking_menu ;;
+    3) isp="TCI" blocking_menu ;;
     *) echo "Invalid option"; main_menu ;;
     esac
 }
@@ -47,6 +49,13 @@ function blocker {
         # Get the IP list from Github
         if [ "$isp" == "MCI" ]; then
         IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/IR-ISP-Blocker/main/mci-ips.ipv4')
+        if [ $? -ne 0 ]; then
+        echo "Failed to fetch the MTN IP list. Please contact with @Kiya6955"
+        read -p "Press enter to return to Menu" dummy
+        blocking_menu
+        fi
+        elif [ "$isp" == "TCI" ]; then
+        IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/IR-ISP-Blocker/main/tci-ips.ipv4')
         if [ $? -ne 0 ]; then
         echo "Failed to fetch the MTN IP list. Please contact with @Kiya6955"
         read -p "Press enter to return to Menu" dummy
@@ -98,9 +107,16 @@ function blocker {
             
             clear
 
-            echo "Please Wait..."
-            # Delete previous rules
+            read -p "Do you want to delete the previous rules? [Y/N] : " confirm
+            if [[ $confirm == [Yy]* ]]; then
             sudo iptables -F
+            echo "Previous rules deleted successfully"
+            sleep 2s
+            fi
+
+            clear
+
+            echo "Blocking [$ports] for $isp started please Wait..."
 
             for ports in "${portArray[@]}"
             do
@@ -116,12 +132,6 @@ function blocker {
             done
             done
 
-            # Open SSH Port
-            read -p "Enter the SSH port you want to open (default is 22): " SSH_PORT
-            SSH_PORT=${SSH_PORT:-22}
-
-            sudo iptables -A INPUT -p tcp --dport $SSH_PORT -j ACCEPT
-
             # Save rules
             sudo /sbin/iptables-save
 
@@ -129,16 +139,21 @@ function blocker {
 
             if [ "$protocol" == "all" ]; then
             echo "TCP & UDP [$ports] successfully blocked for $isp."
-            echo "Port $SSH_PORT has been opened for SSH."
             else
             echo "$protocol [$ports] successfully blocked for $isp."
-            echo "Port $SSH_PORT has been opened for SSH."
             fi
             ;;
         2)
             clear
-            # Delete previous rules
+
+            read -p "Do you want to delete the previous rules? [Y/N] : " confirm
+            if [[ $confirm == [Yy]* ]]; then
             sudo iptables -F
+            echo "Previous rules deleted successfully"
+            sleep 2s
+            fi
+
+            clear
             
             # Open SSH Port
             read -p "Enter the SSH port you want to open (default is 22): " SSH_PORT
@@ -148,7 +163,7 @@ function blocker {
 
             clear
             
-            echo "Please Wait..."
+            echo "Blocking all ports for $isp started please Wait..."
             # Add new rules
             for IP in $IP_LIST; do
                 sudo iptables -A INPUT -s $IP -j DROP
