@@ -14,7 +14,7 @@ function main_menu {
     2) isp="MTN" blocking_menu ;;
     3) isp="TCI" blocking_menu ;;
     4) echo "Exiting...";
-    *) echo "Invalid option";;
+    *) echo "Invalid option"; main_menu ;;
     esac
 }
 
