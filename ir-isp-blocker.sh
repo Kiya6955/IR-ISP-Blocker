@@ -43,6 +43,7 @@ function blocker {
 
     # Create chain
     sudo iptables -N isp-blocker
+    sudo iptables -I INPUT 1 -j isp-blocker
     clear
 
     # Ask User
