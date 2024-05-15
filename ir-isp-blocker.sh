@@ -42,8 +42,14 @@ function blocker {
     sudo apt-get install -y iptables-persistent
 
     # Create chain
-    sudo iptables -N isp-blocker
-    sudo iptables -I INPUT 1 -j isp-blocker
+    if ! iptables -L isp-blocker &> /dev/null; then
+        iptables -N isp-blocker
+    fi
+
+    if ! iptables -C INPUT -j isp-blocker &> /dev/null; then
+        iptables -A INPUT -j isp-blocker
+    fi
+
     clear
 
     # Ask User
