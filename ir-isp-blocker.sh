@@ -39,6 +39,7 @@ function blocker {
     # Install iptables
     sudo apt-get update
     sudo apt-get install -y iptables
+    sudo apt-get install -y iptables-persistent
 
     # Create chain
     sudo iptables -N isp-blocker
@@ -137,7 +138,7 @@ function blocker {
             done
 
             # Save rules
-            sudo /sbin/iptables-save
+            sudo iptables-save > /etc/iptables/rules.v4
 
             clear
 
@@ -174,7 +175,7 @@ function blocker {
             done
             
             # Save rules
-            sudo /sbin/iptables-save
+            sudo iptables-save > /etc/iptables/rules.v4
 
             
             clear
