@@ -195,7 +195,7 @@ function blocker {
 
 function unblocker {
     clear
-    sudo iptables -F
+    sudo iptables -F isp-blocker
     sudo /sbin/iptables-save
     clear
     echo "All ISPs UnBlocked successfully!"
