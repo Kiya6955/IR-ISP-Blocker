@@ -39,6 +39,9 @@ function blocker {
     # Install iptables
     sudo apt-get update
     sudo apt-get install -y iptables
+
+    # Create chain
+    sudo iptables -N isp-blocker
     clear
 
     # Ask User
@@ -110,7 +113,7 @@ function blocker {
 
             read -p "Do you want to delete the previous rules? [Y/N] : " confirm
             if [[ $confirm == [Yy]* ]]; then
-            sudo iptables -F
+            sudo iptables -F isp-blocker
             echo "Previous rules deleted successfully"
             sleep 2s
             fi
@@ -124,11 +127,11 @@ function blocker {
             for IP in $IP_LIST; do
                 if [ "$protocol" == "all" ]; then
                     # Add Rules for both TCP and UDP
-                    sudo iptables -A INPUT -s $IP -p tcp --match multiport --dport $ports -j DROP
-                    sudo iptables -A INPUT -s $IP -p udp --match multiport --dport $ports -j DROP
+                    sudo iptables -A isp-blocker -s $IP -p tcp --match multiport --dport $ports -j DROP
+                    sudo iptables -A isp-blocker -s $IP -p udp --match multiport --dport $ports -j DROP
                 else
                     # Add Rules for either TCP or UDP
-                    sudo iptables -A INPUT -s $IP -p $protocol --match multiport --dport $ports -j DROP
+                    sudo iptables -A isp-blocker -s $IP -p $protocol --match multiport --dport $ports -j DROP
                 fi
             done
             done
@@ -149,7 +152,7 @@ function blocker {
 
             read -p "Do you want to delete the previous rules? [Y/N] : " confirm
             if [[ $confirm == [Yy]* ]]; then
-            sudo iptables -F
+            sudo iptables -F isp-blocker
             echo "Previous rules deleted successfully"
             sleep 2s
             fi
@@ -160,14 +163,14 @@ function blocker {
             read -p "Enter the SSH port you want to open (default is 22): " SSH_PORT
             SSH_PORT=${SSH_PORT:-22}
 
-            sudo iptables -A INPUT -p tcp --dport $SSH_PORT -j ACCEPT
+            sudo iptables -A isp-blocker -p tcp --dport $SSH_PORT -j ACCEPT
 
             clear
             
             echo "Blocking all ports for $isp started please Wait..."
             # Add new rules
             for IP in $IP_LIST; do
-                sudo iptables -A INPUT -s $IP -j DROP
+                sudo iptables -A isp-blocker -s $IP -j DROP
             done
             
             # Save rules
