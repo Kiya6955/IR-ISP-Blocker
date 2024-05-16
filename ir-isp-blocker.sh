@@ -1,9 +1,17 @@
 #!/bin/bash
 
+if [[ $EUID -ne 0 ]]; then
+    clear
+    echo "You should run this script with root!"
+    echo "Use sudo -i to change user to root"
+    exit 1
+fi
+
 function main_menu {
     clear
     echo "---------- Iran ISP Blocker ----------"
-    echo "Which ISP do you want block/unblock? : "
+    echo "Which ISP do you want block/unblock?"
+    echo "--------------------------------------"
     echo "1-MCI(Hamrah Aval)"
     echo "2-MTN(Irancell)"
     echo "3-TCI(Mokhaberat)"
@@ -37,9 +45,13 @@ function blocker {
 
     clear
     # Install iptables
-    sudo apt-get update
-    sudo apt-get install -y iptables
-    sudo apt-get install -y iptables-persistent
+    if ! command -v iptables &> /dev/null; then
+        sudo apt-get update
+        sudo apt-get install -y iptables
+    fi
+    if ! dpkg -s iptables-persistent &> /dev/null; then
+        sudo apt-get install -y iptables-persistent
+    fi
 
     # Create chain
     if ! iptables -L isp-blocker &> /dev/null; then
