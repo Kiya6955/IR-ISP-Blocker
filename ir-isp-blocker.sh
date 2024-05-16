@@ -59,7 +59,7 @@ function blocker {
     fi
 
     if ! iptables -C INPUT -j isp-blocker &> /dev/null; then
-        iptables -A INPUT -j isp-blocker
+        iptables -I INPUT 1 -j isp-blocker
     fi
 
     clear
