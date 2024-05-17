@@ -11,7 +11,7 @@ function main_menu {
     clear
     
     echo "---------- Iran ISP Blocker ----------"
-    echo "https://github.com/Kiya6955/IR-ISP-Blocker""
+    echo "https://github.com/Kiya6955/IR-ISP-Blocker"
     echo "--------------------------------------"
     echo "Which ISP do you want block/unblock?"
     echo "--------------------------------------"
