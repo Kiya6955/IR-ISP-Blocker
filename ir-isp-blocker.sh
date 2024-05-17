@@ -16,7 +16,7 @@ function main_menu {
    | |   |  _  /  |______|   | |    \___ \  |  ___/  |______| |  _ <  | |  / _ \   / __| | |/ /  / _ \ | '__|
   _| |_  | | \ \            _| |_   ____) | | |               | |_) | | | | (_) | | (__  |   <  |  __/ | |   
  |_____| |_|  \_\          |_____| |_____/  |_|               |____/  |_|  \___/   \___| |_|\_\  \___| |_|   
-https://github.com/Kiya6955/IR-ISP-Blocker"
+                                                               https://github.com/Kiya6955/IR-ISP-Blocker"
     echo "Which ISP do you want block/unblock?"
     echo "--------------------------------------"
     echo "1-MCI(Hamrah Aval)"
