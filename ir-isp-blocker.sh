@@ -54,8 +54,8 @@ function blocker {
     fi
 
     # Create chain
-    if ! iptables -L isp-blocker &> /dev/null; then
-        iptables -N isp-blocker
+    if ! iptables -L isp-blocker -n >/dev/null 2>&1; then
+    iptables -N isp-blocker
     fi
 
     if ! iptables -C INPUT -j isp-blocker &> /dev/null; then
