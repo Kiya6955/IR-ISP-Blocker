@@ -7,6 +7,7 @@
 </div>
 
 ## A simple bash script to block IP ranges of **Iranian ISPs** to prevent your server from being blocked by GFW.
+**[آموزش فارسی](https://telegra.ph/IR-ISP-Blocker-05-18-2)**
 
 ISPs that script support now
 - MCi ( Hamrah Aval )
