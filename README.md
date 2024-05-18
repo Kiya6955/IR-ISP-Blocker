@@ -9,9 +9,9 @@
 ## A simple bash script to block IP ranges of **Iranian ISPs** to prevent your server from being blocked by GFW.
 
 ISPs that script support now
-- MCI ( Hamrah Aval )
+- MCi ( Hamrah Aval )
 - MTN ( Irancell )
-- TCI ( Mokhaberat )
+- TCi ( Mokhaberat )
 ### Using
 Open your terminal and run the script with
 ```
