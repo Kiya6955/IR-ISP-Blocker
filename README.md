@@ -13,6 +13,7 @@ ISPs that script support now
 - MCi ( Hamrah Aval )
 - MTN ( Irancell )
 - TCi ( Mokhaberat )
+- RTL ( Rightel )
 ### Using
 Open your terminal and run the script with
 ```
