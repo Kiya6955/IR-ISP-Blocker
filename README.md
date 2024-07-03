@@ -15,6 +15,7 @@ ISPs that script support now
 - TCi ( Mokhaberat )
 - Rightel
 - Shatel
+- AsiaTech
 ### Using
 Open your terminal and run the script with
 ```

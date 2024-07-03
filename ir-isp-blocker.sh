@@ -19,7 +19,8 @@ function main_menu {
     echo "3-TCI(Mokhaberat)"
     echo "4-Rightel"
     echo "5-Shatel"
-    echo "6-Exit"
+    echo "6-AsiaTech"
+    echo "7-Exit"
     read -p "Enter your choice: " isp
     case $isp in
     1) isp="MCI" blocking_menu ;;
@@ -27,7 +28,8 @@ function main_menu {
     3) isp="TCI" blocking_menu ;;
     4) isp="RTL" blocking_menu ;;
     5) isp="SHT" blocking_menu ;;
-    6) echo "Exiting..."; exit 0 ;;
+    6) isp="ASI" blocking_menu ;;
+    7) echo "Exiting..."; exit 0 ;;
     *) echo "Invalid option"; main_menu ;;
     esac
 }
@@ -85,6 +87,9 @@ function blocker {
             ;;
         "SHT")
             IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/IR-ISP-Blocker/main/shatel-ips.ipv4')
+            ;;
+        "ASI")
+            IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/IR-ISP-Blocker/main/asiatech-ips.ipv4')
             ;;
         esac
 
