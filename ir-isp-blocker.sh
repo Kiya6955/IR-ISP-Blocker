@@ -17,15 +17,17 @@ function main_menu {
     echo "1-MCI(Hamrah Aval)"
     echo "2-MTN(Irancell)"
     echo "3-TCI(Mokhaberat)"
-    echo "4-Rightel(RTL)"
-    echo "5-Exit"
+    echo "4-Rightel"
+    echo "5-Shatel"
+    echo "6-Exit"
     read -p "Enter your choice: " isp
     case $isp in
     1) isp="MCI" blocking_menu ;;
     2) isp="MTN" blocking_menu ;;
     3) isp="TCI" blocking_menu ;;
     4) isp="RTL" blocking_menu ;;
-    5) echo "Exiting..."; exit 0 ;;
+    5) isp="SHT" blocking_menu ;;
+    6) echo "Exiting..."; exit 0 ;;
     *) echo "Invalid option"; main_menu ;;
     esac
 }
@@ -60,7 +62,7 @@ function blocker {
     fi
 
     if ! iptables -C INPUT -j isp-blocker &> /dev/null; then
-        iptables -I INPUT 1 -j isp-blocker
+        iptables -I INPUT -j isp-blocker
     fi
 
     clear
@@ -81,6 +83,9 @@ function blocker {
         "RTL")
             IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/IR-ISP-Blocker/main/rightel-ips.ipv4')
             ;;
+        "SHT")
+            IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/IR-ISP-Blocker/main/shatel-ips.ipv4')
+            ;;
         esac
 
         if [ $? -ne 0 ]; then
@@ -96,6 +101,10 @@ function blocker {
         echo "3-Back to Main Menu"
         read -p "Enter your choice: " choice
 
+        clear
+        read -p "Enter IP addresses you want whitelist for $isp (separate with comma like 1.1.1.1,8.8.8.8 or leave empty for none): " whitelist_ips
+        IFS=',' read -r -a whitelistIPArray <<< "$whitelist_ips"
+        
         clear
         if [[ $choice == 1 ]]; then
             read -p "Enter the ports you want block for $isp (enter single like 443 or separated by comma like 443,8443): " ports
@@ -127,16 +136,20 @@ function blocker {
                 fi
 
                 clear
-                echo "Blocking [$ports] for $isp started please Wait..."
+                echo "Blocking [$ports] for $isp started please wait..."
+
+                for ip in "${whitelistIPArray[@]}"; do
+                    iptables -I isp-blocker -s $ip -j ACCEPT
+                done
 
                 for port in "${portArray[@]}"
                 do
                     for IP in $IP_LIST; do
                         if [ "$protocol" == "all" ]; then
-                            iptables -A isp-blocker -s $IP -p tcp --match multiport --dport $port -j DROP
-                            iptables -A isp-blocker -s $IP -p udp --match multiport --dport $port -j DROP
+                            iptables -A isp-blocker -s $IP -p tcp --dport $port -j DROP
+                            iptables -A isp-blocker -s $IP -p udp --dport $port -j DROP
                         else
-                            iptables -A isp-blocker -s $IP -p $protocol --match multiport --dport $port -j DROP
+                            iptables -A isp-blocker -s $IP -p $protocol --dport $port -j DROP
                         fi
                     done
                 done
@@ -152,6 +165,14 @@ function blocker {
                 ;;
             2)
                 clear
+                read -p "Enter ports you want whitelist for $isp (separate with comma like 443,8443 or leave empty for none): " whitelist_ports
+                IFS=',' read -r -a whitelistPortArray <<< "$whitelist_ports"
+
+                clear
+                read -p "Enter the SSH port you want open for $isp (default is 22): " SSH_PORT
+                SSH_PORT=${SSH_PORT:-22}
+
+                clear
                 read -p "Do you want to delete the previous rules? [Y/N] : " confirm
                 if [[ $confirm == [Yy]* ]]; then
                     iptables -F isp-blocker
@@ -160,13 +181,19 @@ function blocker {
                 fi
 
                 clear
-                read -p "Enter the SSH port you want to open (default is 22): " SSH_PORT
-                SSH_PORT=${SSH_PORT:-22}
+                echo "Blocking all ports for $isp started please wait..."
 
-                iptables -A isp-blocker -p tcp --dport $SSH_PORT -j ACCEPT
+                for ip in "${whitelistIPArray[@]}"; do
+                    iptables -I isp-blocker -s $ip -j ACCEPT
+                done
 
-                clear
-                echo "Blocking all ports for $isp started please Wait..."
+                for port in "${whitelistPortArray[@]}"; do
+                    iptables -I isp-blocker -p tcp --dport $port -j ACCEPT
+                    iptables -I isp-blocker -p udp --dport $port -j ACCEPT
+                done
+
+                iptables -I isp-blocker -p tcp --dport $SSH_PORT -j ACCEPT
+
                 for IP in $IP_LIST; do
                     iptables -A isp-blocker -s $IP -j DROP
                 done
