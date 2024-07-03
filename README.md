@@ -13,10 +13,11 @@ ISPs that script support now
 - MCi ( Hamrah Aval )
 - MTN ( Irancell )
 - TCi ( Mokhaberat )
-- RTL ( Rightel )
+- Rightel
+- Shatel
 ### Using
 Open your terminal and run the script with
 ```
-bash <(curl -s https://raw.githubusercontent.com/Kiya6955/IR-ISP-Blocker/main/ir-isp-blocker.sh)
+bash <(curl -s https://raw.githubusercontent.com/Kiya6955/IR-ISP-Blocker/test/ir-isp-blocker.sh)
 ```
 Select ISP that you want to block/unblock
