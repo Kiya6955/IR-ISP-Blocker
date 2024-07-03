@@ -17,15 +17,17 @@ function main_menu {
     echo "1-MCI(Hamrah Aval)"
     echo "2-MTN(Irancell)"
     echo "3-TCI(Mokhaberat)"
-    echo "4-Rightel(RTL)"
-    echo "5-Exit"
+    echo "4-Rightel"
+    echo "5-Shatel"
+    echo "6-Exit"
     read -p "Enter your choice: " isp
     case $isp in
     1) isp="MCI" blocking_menu ;;
     2) isp="MTN" blocking_menu ;;
     3) isp="TCI" blocking_menu ;;
     4) isp="RTL" blocking_menu ;;
-    5) echo "Exiting..."; exit 0 ;;
+    5) isp="SHT" blocking_menu ;;
+    6) echo "Exiting..."; exit 0 ;;
     *) echo "Invalid option"; main_menu ;;
     esac
 }
@@ -80,6 +82,9 @@ function blocker {
             ;;
         "RTL")
             IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/IR-ISP-Blocker/main/rightel-ips.ipv4')
+            ;;
+        "SHT")
+            IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/IR-ISP-Blocker/main/shatel-ips.ipv4')
             ;;
         esac
 
