@@ -56,6 +56,7 @@ function blocker {
         apt-get install -y iptables
     fi
     if ! dpkg -s iptables-persistent &> /dev/null; then
+        apt-get update
         apt-get install -y iptables-persistent
     fi
 
