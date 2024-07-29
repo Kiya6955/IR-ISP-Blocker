@@ -22,7 +22,7 @@ function main_menu {
     echo "6-AsiaTech"
     echo "7-Pishgaman"
     echo "8-MobinNet"
-    echo "9-ParsaOnline"
+    echo "9-ParsOnline"
     echo "10-Exit"
     read -p "Enter your choice: " isp
     case $isp in
