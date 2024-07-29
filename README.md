@@ -16,6 +16,9 @@ ISPs that script support now
 - Rightel
 - Shatel
 - AsiaTech
+- Pishgaman
+- MobinNet
+- ParsOnline
 ### Using
 Open your terminal and run the script with
 ```
