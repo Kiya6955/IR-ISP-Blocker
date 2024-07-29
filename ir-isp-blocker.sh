@@ -9,14 +9,14 @@ fi
 
 function main_menu {
     clear
-    echo "---------- IR-ISP-Blocker ----------"
+    echo "----------- IR-ISP-Blocker -----------"
     echo "https://github.com/Kiya6955/IR-ISP-Blocker"
     echo "--------------------------------------"
     echo "Which ISP do you want block/unblock?"
     echo "--------------------------------------"
-    echo "1-MCI(Hamrah Aval)"
-    echo "2-MTN(Irancell)"
-    echo "3-TCI(Mokhaberat)"
+    echo "1-Hamrah Aval"
+    echo "2-Irancell"
+    echo "3-Mokhaberat"
     echo "4-Rightel"
     echo "5-Shatel"
     echo "6-AsiaTech"
