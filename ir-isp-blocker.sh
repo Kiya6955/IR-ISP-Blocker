@@ -9,7 +9,7 @@ fi
 
 function main_menu {
     clear
-    echo "---------- Iran ISP Blocker ----------"
+    echo "---------- IR-ISP-Blocker ----------"
     echo "https://github.com/Kiya6955/IR-ISP-Blocker"
     echo "--------------------------------------"
     echo "Which ISP do you want block/unblock?"
@@ -20,7 +20,10 @@ function main_menu {
     echo "4-Rightel"
     echo "5-Shatel"
     echo "6-AsiaTech"
-    echo "7-Exit"
+    echo "7-Pishgaman"
+    echo "8-MobinNet"
+    echo "9-ParsaOnline"
+    echo "10-Exit"
     read -p "Enter your choice: " isp
     case $isp in
     1) isp="MCI" blocking_menu ;;
@@ -29,7 +32,10 @@ function main_menu {
     4) isp="RTL" blocking_menu ;;
     5) isp="SHT" blocking_menu ;;
     6) isp="ASI" blocking_menu ;;
-    7) echo "Exiting..."; exit 0 ;;
+    7) isp="PIS" blocking_menu ;;
+    8) isp="MOB" blocking_menu ;;
+    9) isp="PAR" blocking_menu ;;
+    10) echo "Exiting..."; exit 0 ;;
     *) echo "Invalid option"; main_menu ;;
     esac
 }
@@ -91,6 +97,15 @@ function blocker {
             ;;
         "ASI")
             IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/IR-ISP-Blocker/main/asiatech-ips.ipv4')
+            ;;
+        "PIS")
+            IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/IR-ISP-Blocker/main/pishgaman-ips.ipv4')
+            ;;
+        "MOB")
+            IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/IR-ISP-Blocker/main/mobinnet-ips.ipv4')
+            ;;
+        "PAR")
+            IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/IR-ISP-Blocker/main/parsan-ips.ipv4')
             ;;
         esac
 
