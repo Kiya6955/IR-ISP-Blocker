@@ -29,12 +29,12 @@ function main_menu {
     1) isp="MCI" blocking_menu ;;
     2) isp="MTN" blocking_menu ;;
     3) isp="TCI" blocking_menu ;;
-    4) isp="RTL" blocking_menu ;;
-    5) isp="SHT" blocking_menu ;;
-    6) isp="ASI" blocking_menu ;;
-    7) isp="PIS" blocking_menu ;;
-    8) isp="MOB" blocking_menu ;;
-    9) isp="PAR" blocking_menu ;;
+    4) isp="Rightel" blocking_menu ;;
+    5) isp="Shatel" blocking_menu ;;
+    6) isp="AsiaTech" blocking_menu ;;
+    7) isp="Pishgaman" blocking_menu ;;
+    8) isp="MobinNet" blocking_menu ;;
+    9) isp="ParsOnline" blocking_menu ;;
     10) echo "Exiting..."; exit 0 ;;
     *) echo "Invalid option"; main_menu ;;
     esac
@@ -89,22 +89,22 @@ function blocker {
         "TCI")
             IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/IR-ISP-Blocker/main/tci-ips.ipv4')
             ;;
-        "RTL")
+        "Rightel")
             IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/IR-ISP-Blocker/main/rightel-ips.ipv4')
             ;;
-        "SHT")
+        "Shatel")
             IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/IR-ISP-Blocker/main/shatel-ips.ipv4')
             ;;
-        "ASI")
+        "AsiaTech")
             IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/IR-ISP-Blocker/main/asiatech-ips.ipv4')
             ;;
-        "PIS")
+        "Pishgaman")
             IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/IR-ISP-Blocker/main/pishgaman-ips.ipv4')
             ;;
-        "MOB")
+        "MobinNet")
             IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/IR-ISP-Blocker/main/mobinnet-ips.ipv4')
             ;;
-        "PAR")
+        "ParsOnline")
             IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/IR-ISP-Blocker/main/parsan-ips.ipv4')
             ;;
         esac
