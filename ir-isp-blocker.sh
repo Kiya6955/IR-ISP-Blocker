@@ -238,11 +238,6 @@ function blocker {
         esac
         read -p "Press enter to return to Menu" dummy
         blocking_menu
-    else
-        echo "Cancelled."
-        read -p "Press enter to return to Menu" dummy
-        blocking_menu
-    fi
 }
 
 function only_mode {
