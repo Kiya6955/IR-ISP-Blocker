@@ -267,10 +267,6 @@ function only_mode {
     clear
     echo "Blocking all ISPs for ports (${blocklistPortArray[*]// /, }) except $isp started, please wait..."
 
-    if ! iptables -C isp-blocker -p tcp --dport "$SSH_PORT" -j ACCEPT 2>/dev/null; then
-        iptables -I isp-blocker -p tcp --dport "$SSH_PORT" -j ACCEPT
-    fi
-
     for IP in $IP_LIST; do
         for port in "${blocklistPortArray[@]}"; do
             iptables -I isp-blocker -s $IP -p tcp --dport $port -j ACCEPT
@@ -278,6 +274,10 @@ function only_mode {
         done
     done
 
+    if ! iptables -C isp-blocker -p tcp --dport "$SSH_PORT" -j ACCEPT 2>/dev/null; then
+        iptables -I isp-blocker -p tcp --dport "$SSH_PORT" -j ACCEPT
+    fi
+    
     for port in "${blocklistPortArray[@]}"; do
         iptables -A isp-blocker -p tcp --dport $port -j DROP
         iptables -A isp-blocker -p udp --dport $port -j DROP
