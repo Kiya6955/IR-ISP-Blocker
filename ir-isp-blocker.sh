@@ -279,8 +279,12 @@ function only_mode {
     fi
     
     for port in "${blocklistPortArray[@]}"; do
-        iptables -A isp-blocker -p tcp --dport $port -j DROP
-        iptables -A isp-blocker -p udp --dport $port -j DROP
+        if ! iptables -C isp-blocker -p tcp --dport $port -j DROP 2>/dev/null; then
+            iptables -A isp-blocker -p tcp --dport $port -j DROP
+        fi
+        if ! iptables -C isp-blocker -p udp --dport $port -j DROP 2>/dev/null; then
+            iptables -A isp-blocker -p udp --dport $port -j DROP
+        fi
     done
     
     iptables-save > /etc/iptables/rules.v4
