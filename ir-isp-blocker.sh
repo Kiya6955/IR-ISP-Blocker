@@ -12,7 +12,7 @@ function main_menu {
     echo "----------- IR-ISP-Blocker -----------"
     echo "https://github.com/Kiya6955/IR-ISP-Blocker"
     echo "--------------------------------------"
-    echo "Which ISP do you want block/unblock?"
+    echo "Which ISP do you want to perform an action on?"
     echo "--------------------------------------"
     echo "1-Hamrah Aval"
     echo "2-Irancell"
@@ -23,7 +23,8 @@ function main_menu {
     echo "7-Pishgaman"
     echo "8-MobinNet"
     echo "9-ParsOnline"
-    echo "10-Exit"
+    echo "10-Unblock All"
+    echo "11-Exit"
     read -p "Enter your choice: " isp
     case $isp in
     1) isp="MCI" blocking_menu ;;
@@ -35,35 +36,26 @@ function main_menu {
     7) isp="Pishgaman" blocking_menu ;;
     8) isp="MobinNet" blocking_menu ;;
     9) isp="ParsOnline" blocking_menu ;;
-    10) echo "Exiting..."; exit 0 ;;
+    10) unblocker ;;
+    11) echo "Exiting..."; exit 0 ;;
     *) echo "Invalid option"; main_menu ;;
     esac
 }
 
 function blocking_menu {
-    clear
-    echo "---------- $isp Menu ----------"
-    echo "1-Block $isp"
-    echo "2-UnBlock All"
-    echo "3-Back to Main Menu"
-    read -p "Enter your choice: " choice
-    case $choice in
-        1) blocker ;;
-        2) unblocker ;;
-        3) main_menu ;;
-        *) echo "Invalid option press enter"; blocking_menu ;;
-    esac
-}
+    echo "ٌWait a minute, installing prerequisites..."
+    sleep 2s
 
-function blocker {
     clear
-    if ! command -v iptables &> /dev/null; then
-        apt-get update
-        apt-get install -y iptables
+
+    if ! dpkg -l | grep -q iptables; then
+        apt update
+        apt install -y iptables
     fi
-    if ! dpkg -s iptables-persistent &> /dev/null; then
-        apt-get update
-        apt-get install -y iptables-persistent
+
+    if ! dpkg -l | grep -q iptables-persistent; then
+        apt update
+        apt install -y iptables-persistent
     fi
 
     if ! iptables -L isp-blocker -n >/dev/null 2>&1; then
@@ -74,12 +66,10 @@ function blocker {
         iptables -I INPUT -j isp-blocker
     fi
 
-    clear
-    read -p "Are you sure about blocking $isp? [Y/N] : " confirm
     
-    if [[ $confirm == [Yy]* ]]; then
-        clear
-        case $isp in
+    clear
+
+    case $isp in
         "MCI")
             IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/IR-ISP-Blocker/main/mci-ips.ipv4')
             ;;
@@ -107,14 +97,31 @@ function blocker {
         "ParsOnline")
             IP_LIST=$(curl -s 'https://raw.githubusercontent.com/Kiya6955/IR-ISP-Blocker/main/parsan-ips.ipv4')
             ;;
-        esac
+    esac
 
-        if [ $? -ne 0 ]; then
-            echo "Failed to fetch the IP list. Please contact @Kiya6955"
-            read -p "Press enter to return to Menu" dummy
-            blocking_menu
-        fi
+    if [ $? -ne 0 ]; then
+        echo "Failed to fetch the IP list. Please contact @Kiya6955"
+        read -p "Press enter to return to Menu" dummy
+        blocking_menu
+    fi      
         
+    clear
+
+    echo "---------- $isp Menu ----------"
+    echo "1-Block $isp"
+    echo "2-$isp Only"
+    echo "3-Back to Main Menu"
+    read -p "Enter your choice: " choice
+    case $choice in
+        1) blocker ;;
+        2) only_mode ;;
+        3) main_menu ;;
+        *) echo "Invalid option press enter"; blocking_menu ;;
+    esac
+}
+
+function blocker {
+    clear
         clear
         echo "Choose an option:"
         echo "1-Block specific ports for $isp"
@@ -213,7 +220,9 @@ function blocker {
                     iptables -I isp-blocker -p udp --dport $port -j ACCEPT
                 done
 
-                iptables -I isp-blocker -p tcp --dport $SSH_PORT -j ACCEPT
+                if ! iptables -C isp-blocker -p tcp --dport "$SSH_PORT" -j ACCEPT 2>/dev/null; then
+                    iptables -I isp-blocker -p tcp --dport "$SSH_PORT" -j ACCEPT
+                fi
 
                 for IP in $IP_LIST; do
                     iptables -A isp-blocker -s $IP -j DROP
@@ -229,11 +238,59 @@ function blocker {
         esac
         read -p "Press enter to return to Menu" dummy
         blocking_menu
-    else
-        echo "Cancelled."
-        read -p "Press enter to return to Menu" dummy
+}
+
+function only_mode {
+    clear
+    read -p "Enter the your SSH port (default is 22): " SSH_PORT
+    SSH_PORT=${SSH_PORT:-22}
+    
+    clear
+    read -p "Enter ports to block for all ISPs except $isp (separate with comma like 443,8443): " blocklist_ports
+    IFS=',' read -r -a blocklistPortArray <<< "$blocklist_ports"
+    
+    if [[ -z "$blocklist_ports" ]]; then
         blocking_menu
+        return
     fi
+
+    blocklistPortArray=("${blocklistPortArray[@]}")
+
+    clear
+    read -p "Do you want to delete the previous rules? [Y/N]: " confirm
+    if [[ $confirm == [Yy]* ]]; then
+        iptables -F isp-blocker
+        echo "Previous rules deleted successfully"
+        sleep 2s
+    fi
+
+    clear
+    echo "Blocking all ISPs for ports (${blocklistPortArray[*]// /, }) except $isp started, please wait..."
+
+    for IP in $IP_LIST; do
+        for port in "${blocklistPortArray[@]}"; do
+            iptables -I isp-blocker -s $IP -p tcp --dport $port -j ACCEPT
+            iptables -I isp-blocker -s $IP -p udp --dport $port -j ACCEPT
+        done
+    done
+
+    if ! iptables -C isp-blocker -p tcp --dport "$SSH_PORT" -j ACCEPT 2>/dev/null; then
+        iptables -I isp-blocker -p tcp --dport "$SSH_PORT" -j ACCEPT
+    fi
+    
+    for port in "${blocklistPortArray[@]}"; do
+        if ! iptables -C isp-blocker -p tcp --dport $port -j DROP 2>/dev/null; then
+            iptables -A isp-blocker -p tcp --dport $port -j DROP
+        fi
+        if ! iptables -C isp-blocker -p udp --dport $port -j DROP 2>/dev/null; then
+            iptables -A isp-blocker -p udp --dport $port -j DROP
+        fi
+    done
+    
+    iptables-save > /etc/iptables/rules.v4
+
+    clear
+    echo "Ports (${blocklistPortArray[*]// /, }) blocked for all isps except $isp successfully"
 }
 
 function unblocker {
