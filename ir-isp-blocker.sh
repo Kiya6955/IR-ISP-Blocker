@@ -241,6 +241,7 @@ function blocker {
 }
 
 function only_mode {
+
     clear
     read -p "Enter the your SSH port (default is 22): " SSH_PORT
     SSH_PORT=${SSH_PORT:-22}
@@ -255,6 +256,10 @@ function only_mode {
     fi
 
     blocklistPortArray=("${blocklistPortArray[@]}")
+
+    clear
+    read -p "Enter IP addresses you want whitelist for (${blocklistPortArray[*]// /, }) (separate with comma like 1.1.1.1,8.8.8.8 or leave empty for none): " whitelist_ips
+    IFS=',' read -r -a whitelistIPArray <<< "$whitelist_ips"
 
     clear
     read -p "Do you want to delete the previous rules? [Y/N]: " confirm
@@ -274,6 +279,10 @@ function only_mode {
         done
     done
 
+    for ip in "${whitelistIPArray[@]}"; do
+        iptables -I isp-blocker -s $ip -j ACCEPT
+    done
+    
     if ! iptables -C isp-blocker -p tcp --dport "$SSH_PORT" -j ACCEPT 2>/dev/null; then
         iptables -I isp-blocker -p tcp --dport "$SSH_PORT" -j ACCEPT
     fi
