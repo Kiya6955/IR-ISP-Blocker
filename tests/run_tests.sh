@@ -90,8 +90,8 @@ out=$(IRB_BACKEND=nft irb --dry-run block --isp 'mci;id'); expect_has "injection
 out=$(IRB_BACKEND=nft irb --dry-run block --isp mci --ports '443;reboot'); expect_has "injection in --ports rejected" "$out" "invalid --ports"
 out=$(IRB_BACKEND=nft irb --dry-run block --isp mci --ports 0); expect_has "port 0 rejected" "$out" "invalid --ports"
 out=$(IRB_BACKEND=nft irb --dry-run block --isp mci --whitelist '1.2.3.4;x'); expect_has "bad whitelist rejected" "$out" "invalid whitelist"
-out=$(IRB_SSHD_CONFIG=/nonexistent IRB_BACKEND=nft irb --dry-run block --isp mci); expect_has "all-ports refused without SSH port" "$out" "Could not detect any SSH port"
-out=$(IRB_SSHD_CONFIG=/nonexistent IRB_BACKEND=nft irb --dry-run block --isp mci --ssh-port 22022)
+out=$(IRB_SSH_PROBE=0 IRB_SSHD_CONFIG=/nonexistent IRB_BACKEND=nft irb --dry-run block --isp mci); expect_has "all-ports refused without SSH port" "$out" "Could not detect any SSH port"
+out=$(IRB_SSH_PROBE=0 IRB_SSHD_CONFIG=/nonexistent IRB_BACKEND=nft irb --dry-run block --isp mci --ssh-port 22022)
 expect_has "--ssh-port satisfies protection" "$out" "tcp dport { 22022 } accept"
 out=$(IRB_BACKEND=nft irb --dry-run block --isp mci --no-ssh-protect); expect_has "no-ssh-protect needs --force" "$out" "refusing without --force"
 

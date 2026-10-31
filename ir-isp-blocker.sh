@@ -642,11 +642,11 @@ detect_ssh_ports() { # prints spec of detected ports (may be empty)
         while read -r p; do [[ $p =~ ^[0-9]+$ ]] && found+=("$p"); done < <(
             awk 'tolower($1)=="port"{print $2} tolower($1)=="listenaddress"{ if (match($2,/:[0-9]+$/)) print substr($2,RSTART+1) }' "${files[@]}" 2>/dev/null || true)
     fi
-    if have ss; then
+    if [[ ${IRB_SSH_PROBE:-1} == 1 ]] && have ss; then
         while read -r p; do [[ $p =~ ^[0-9]+$ ]] && found+=("$p"); done < <(
             ss -Hltnp 2>/dev/null | awk '/"sshd/ { n=split($4,a,":"); print a[n] }' || true)
     fi
-    if [[ ${#found[@]} -eq 0 ]] && { [[ -r $IRB_SSHD_CONFIG ]] || have sshd; }; then found+=(22); fi
+    if [[ ${#found[@]} -eq 0 ]] && { [[ -r $IRB_SSHD_CONFIG ]] || { [[ ${IRB_SSH_PROBE:-1} == 1 ]] && have sshd; }; }; then found+=(22); fi
     [[ -n $CFG_SSH_PORTS ]] && found+=("$CFG_SSH_PORTS")
     [[ ${#found[@]} -eq 0 ]] && return 0
     local IFS=,
