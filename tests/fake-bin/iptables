@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Fake iptables for tests. Only emulates a v1 'isp-blocker' chain when $FAKE_LEGACY points to
+# an `iptables -S isp-blocker` dump; everything else fails like "no such chain".
+set -euo pipefail
+args=" $* "
+if [[ -n ${FAKE_LEGACY:-} && -f $FAKE_LEGACY && $args == *" isp-blocker "* ]]; then
+    case $args in
+        *" -S isp-blocker "*) cat -- "$FAKE_LEGACY"; exit 0 ;;
+        *" -L isp-blocker "*) exit 0 ;;
+        *" -X isp-blocker "*) rm -f -- "$FAKE_LEGACY"; exit 0 ;;
+        *" -F isp-blocker "*) exit 0 ;;
+    esac
+fi
+exit 1

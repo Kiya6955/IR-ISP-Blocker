@@ -1,0 +1,6 @@
+* text=auto eol=lf
+*.sh text eol=lf
+tests/fake-bin/* text eol=lf
+*.v4 text eol=lf
+*.v6 text eol=lf
+*.ipv4 text eol=lf

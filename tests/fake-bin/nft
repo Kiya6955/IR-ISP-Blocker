@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Fake nft for tests: records calls, keeps "the kernel ruleset" in $FAKE_STATE/ruleset.
+set -euo pipefail
+: "${FAKE_STATE:?}"
+echo "nft $*" >>"$FAKE_STATE/calls.log"
+case "${1:-}" in
+    -c)
+        [[ -n ${FAKE_NFT_FAIL:-} ]] && { echo "Error: fake failure" >&2; exit 1; }
+        [[ ${2:-} == -f ]] || exit 1
+        # minimal syntax sanity: balanced braces and no empty element blocks
+        f=${3:--}; [[ $f == - ]] && f=/dev/stdin
+        awk '{ o += gsub(/{/, "{"); c += gsub(/}/, "}") } END { exit (o == c) ? 0 : 1 }' "$f"
+        ;;
+    -f)
+        [[ -n ${FAKE_NFT_FAIL:-} ]] && exit 1
+        cp -- "$2" "$FAKE_STATE/ruleset"
+        ;;
+    list)
+        [[ -f $FAKE_STATE/ruleset ]] || exit 1
+        # emulate counters: every "counter" gets 7 packets
+        sed -n '/^table inet ir_isp_blocker {/,$p' "$FAKE_STATE/ruleset" | sed 's/counter /counter packets 7 bytes 420 /'
+        ;;
+    delete)
+        rm -f -- "$FAKE_STATE/ruleset"
+        ;;
+    *) exit 0 ;;
+esac

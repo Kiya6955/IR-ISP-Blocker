@@ -1,0 +1,66 @@
+#asn	isp	holder (RIPEstat as-overview)	v4	v6
+AS12880	dci	DCI-AS Iran Information Technology Company PJSC	13	1
+AS16322	parsonline	PARSONLINE Parsan Lin Co. PJS	9	0
+AS197207	mci	MCCI-AS Mobile Communication Company of Iran PLC	71	21
+AS202468	arvancloud	AbrArvan-AS Noyan Abr Arvan Co. ( Private Joint Stock)	34	1
+AS203000	asiatech	AMIN-ASIA Asiatech Data Transmission company	2	0
+AS203558	fanap	Fanap-DC-AS Tose'h Fanavari Ertebabat Pasargad Arian Co. PJS	2	0
+AS204213	netmihan	netmihan Netmihan Communication Company Ltd	9	0
+AS205585	arvancloud	ARVANCLOUD-CDN-IR Noyan Abr Arvan Co. ( Private Joint Stock)	3	5
+AS206065	fanap	FDI Tose'h Fanavari Ertebabat Pasargad Arian Co. PJS	103	1
+AS21341	sabanet	SINET-AS Soroush Rasanheh Company Ltd	20	1
+AS24631	fanap	FANAPTELECOM-FCP Tose'h Fanavari Ertebabat Pasargad Arian Co. PJS	117	1
+AS25124	datak	DATAK Datak Company LLC	7	1
+AS25184	afranet	AFRANET Afranet	12	1
+AS31549	shatel	RASANA Aria Shatel PJSC	15	1
+AS3263	pishgaman	Pishgaman Pishgaman Toseeh Ertebatat Company (Private Joint Stock)	1	0
+AS34369	shatel	AS-SHATELMOBILE Aria Shatel PJSC	6	2
+AS34636	asiatech	Laser-AS Asiatech Data Transmission company	0	0
+AS34837	ipm	IRANET-IPM Institute for Research in Fundamental Sciences	22	0
+AS34918	pishgaman	PISHGAMAN-DATACENTER Pishgaman Toseeh Ertebatat Company (Private Joint Stock)	7	0
+AS39074	sepanta	IR-SEPANTA Sepanta Communication Development Co. Ltd	29	1
+AS39164	fanava	FIDC Dade Samane Fanava Company (PJS)	0	0
+AS39308	ask	ASK-AS ANDISHE SABZ KHAZAR CO. P.J.S.	5	0
+AS39501	nedagostar	NGSAS-NedaGostarSaba Parvaresh Dadeha Co. Private Joint Stock	63	0
+AS41689	asiatech	EDGE-NETWORK Asiatech Data Transmission company	0	0
+AS41881	fanava	Fanava-AS Fanava Group	34	2
+AS42337	respina	RESPINA-AS Respina Networks & Beyond PJSC	114	2
+AS43245	datak	DATAKIX Datak Company LLC	0	0
+AS43343	fanap	FANAPTELECOM Tose'h Fanavari Ertebabat Pasargad Arian Co. PJS	0	0
+AS43358	mci	MCCI Mobile Communication Company of Iran PLC	0	0
+AS43754	asiatech	ASIATECH Asiatech Data Transmission company	56	3
+AS44244	mtn	IranCell-AS Iran Cell Service and Communication Company	12	9
+AS44966	fanap	FANAP_INFRA_ASN Zirsakht Fanavari Etelaat va Ertebatat Pasargad Aryan PJS	0	0
+AS47330	mobinnet	Mobinnet-AS Mobin Net Communication Company (Private Joint Stock)	5	0
+AS48159	tic	TIC-AS Telecommunication Infrastructure Company	6	1
+AS49100	pishgaman	IR-THR-PTE Pishgaman Toseeh Ertebatat Company (Private Joint Stock)	40	3
+AS49666	tic	TIC-GW-AS Telecommunication Infrastructure Company	5	2
+AS50722	tic	IR-IX-ASN Telecommunication Infrastructure Company	0	0
+AS50810	mobinnet	Mobinnet-AS Mobin Net Communication Company (Private Joint Stock)	71	0
+AS50992	tic	IR-IXP-ASN Telecommunication Infrastructure Company	0	0
+AS51074	mabna	MABNA GOSTARESH-E-ERTEBATAT-E MABNA COMPANY (Private Joint Stock)	4	1
+AS51119	tci	TCI Iran Telecommunication Company PJS	0	0
+AS51433	asiatech	ASIATECH-DC-CUSTOMER Asiatech Data Transmission company	1	0
+AS51828	tci	IR-T-10 Iran Telecommunication Company PJS	0	0
+AS56402	hiweb	DADEHGOSTAR-AS Dadeh Gostar Asr Novin P.J.S. Co.	1	0
+AS56660	pishgaman	PooyanPishroLarestan Pishgaman Toseeh Ertebatat Company (Private Joint Stock)	0	0
+AS57218	rightel	RighTel "Rightel Communication Service Company PJS"	40	4
+AS57391	asiatech	Laser-IDC Asiatech Data Transmission company	0	0
+AS57755	pishgaman	NARIN Pishgaman Toseeh Ertebatat Company (Private Joint Stock)	0	1
+AS57831	pishgaman	MANISAFA Pishgaman Toseeh Ertebatat Company (Private Joint Stock)	0	1
+AS58085	tci	TCE-ASN Iran Telecommunication Company PJS	0	0
+AS58216	pishgaman	Poyan_Pishro_Larestan Pishgaman Toseeh Ertebatat Company (Private Joint Stock)	0	0
+AS58224	tci	TCI Iran Telecommunication Company PJS	501	2
+AS59441	hostiran	Hostiran-Network NOAVARAN SHABAKEH SABZ MEHREGAN (Ltd.)	31	6
+AS59442	mabna	SSJCO GOSTARESH-E-ERTEBATAT-E MABNA COMPANY (Private Joint Stock)	1	0
+AS59481	pishgaman	ErfanNetFarsInternetandSupportServicesCompany Pishgaman Toseeh Ertebatat Company (Private Joint Stock)	0	0
+AS59587	tci	IR-T-10 Iran Telecommunication Company PJS	0	0
+AS59628	tci	TCGOL Iran Telecommunication Company PJS	0	0
+AS59703	nedagostar	IRTRANSIT1 Parvaresh Dadeha Co. Private Joint Stock	5	0
+AS60077	asiatech	AT-CLOUD Asre Dadeha Asiatech	4	1
+AS60976	parsonline	POL Parsan Lin Co. PJS	17	0
+AS61036	fanava	FanavaDP-AS Fanava Group	0	0
+AS61061	parsonline	Pars-online Parsan Lin Co. PJS	1	0
+AS62140	rightel	RIGHTEL-DC "Rightel Communication Service Company PJS"	1	0
+AS62442	fanava	Dade-Samane-Fanava Dade Samane Fanava Company (PJS)	7	2
+AS6736	ipm	IRANET-IPM Institute for Research in Fundamental Sciences	7	0

@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.ipgen-*/
+*.tmp
+.venv/
+.idea/
+.vscode/
