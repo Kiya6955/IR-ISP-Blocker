@@ -1,4 +1,4 @@
-# generated=2026-10-31
+# generated=2026-11-02
 #id	category	name_en	asns	v4	v6
 mci	mobile	Hamrah-e Aval (MCI)	197207,43358	71	21
 mtn	mobile	Irancell (MTN)	44244	12	9
@@ -6,7 +6,7 @@ rightel	mobile	Rightel	57218,62140	41	4
 tci	fixed	Mokhaberat (TCI)	58224,51119,51828,59587,58085,59628	501	2
 shatel	fixed	Shatel	31549,34369	19	1
 asiatech	fixed	Asiatech	43754,34636,41689,51433,57391,203000,60077	63	3
-pishgaman	fixed	Pishgaman	49100,3263,34918,57755,57831,56660,58216,59481	43	5
+pishgaman	fixed	Pishgaman	49100,3263,34918,57755,57831,56660,58216,59481	42	5
 mobinnet	fixed	MobinNet	50810,47330	70	0
 parsonline	fixed	ParsOnline (Parsan Lin)	16322,60976,61061	24	0
 hiweb	fixed	HiWEB (Dadeh Gostar Asr Novin)	56402	1	0
@@ -22,8 +22,8 @@ datak	fixed	Datak	25124,43245	7	1
 nedagostar	fixed	Neda Gostar Saba (Parvaresh Dadeha)	39501,59703	68	0
 tic	infrastructure	TIC (Telecommunication Infrastructure Co., incl. IXP)	48159,49666,50722,50992	7	3
 dci	infrastructure	DCI (Iran Information Technology Co.)	12880	13	1
-ipm	research	IPM / IRANET (research network)	6736,34837	24	0
-arvancloud	datacenter	ArvanCloud (Iran)	202468,205585	34	6
-hostiran	datacenter	HostIran	59441	31	6
+ipm	research	IPM / IRANET (research network)	6736,34837	25	0
+arvancloud	datacenter	ArvanCloud (Iran)	202468,205585	35	6
+hostiran	datacenter	HostIran	59441	32	6
 netmihan	datacenter	Netmihan (Mihan Webhost)	204213	9	0
 all-ir	country	All Iran (country IR, RIPE delegated)	-	1747	577
